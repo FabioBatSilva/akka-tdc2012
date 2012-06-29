@@ -3,7 +3,7 @@ package com.jcranky.tdc2012
 import akka.actor.ActorSystem
 import akka.dispatch.Await
 import akka.pattern.ask
-import akka.testkit.{ImplicitSender, TestActorRef, TestKit}
+import akka.testkit.TestActorRef
 import akka.util.Duration
 import akka.util.Timeout
 import org.specs2.mutable.Specification
