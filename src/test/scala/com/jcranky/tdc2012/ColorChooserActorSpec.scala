@@ -14,9 +14,9 @@ class ColorChooserActorSpec extends Specification {
       val colorChooserActor = TestActorRef(new ColorChooserActor(rProbe.ref, gProbe.ref, bProbe.ref))
       colorChooserActor ! FindColor(Position(0, 0))
       
-      rProbe.expectMsg(FindColorPart); rProbe.sender ! ColorPartFound(0f)
-      gProbe.expectMsg(FindColorPart); gProbe.sender ! ColorPartFound(0f)
-      bProbe.expectMsg(FindColorPart); bProbe.sender ! ColorPartFound(0f)
+      rProbe.expectMsg(FindColorPart); rProbe.sender ! ColorPartFound(0.1f)
+      gProbe.expectMsg(FindColorPart); gProbe.sender ! ColorPartFound(0.2f)
+      bProbe.expectMsg(FindColorPart); bProbe.sender ! ColorPartFound(0.3f)
     }
     
     "return ColorFound with a new color for the specified position" in new ActorScope {
