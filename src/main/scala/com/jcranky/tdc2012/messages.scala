@@ -4,6 +4,8 @@ import java.awt.Color
 
 case class Position(x: Int, y: Int)
 
+case object StartColorPicking
+
 case class FindColor(pos: Position)
 case class ColorFound(pos: Position, color: Color)
 

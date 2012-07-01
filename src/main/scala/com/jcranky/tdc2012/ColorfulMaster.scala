@@ -4,6 +4,7 @@ import akka.actor.Actor
 
 class ColorfulMaster extends Actor {
   def receive = {
-    case ColorFound(pos, color) =>  // paint it ?
+    case StartColorPicking => //TODO: kick-off work
+    case ColorFound(pos, color) =>  //TODO: paint it ?
   }
 }
