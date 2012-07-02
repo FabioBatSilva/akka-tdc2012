@@ -1,10 +1,16 @@
 package com.jcranky.tdc2012.main
 
-class main extends App {
-  //TODO: send the startup message to master
+import com.jcranky.tdc2012._
+
+object main extends App {
+  //TODO: pass some kind of reference to the master, so the screen can be updated with the proper colors
+  ColorfulSystem.master ! StartColorPicking
   
-  //TODO: pass some kind of reference to the master, so that it can update the screen
-  //      when the workers respond with the color to use
+  //TODO: terribly ugly workaround, replace this with a count of the messages
+  //      to find out when we are done
+  Thread.sleep(10000)
+  
+  ColorfulSystem.system.shutdown
 }
 
 //TODO: have another kind of main, to startup a node with the akka micro kernel
