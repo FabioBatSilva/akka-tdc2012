@@ -5,7 +5,7 @@ import com.jcranky.tdc2012._
 import java.awt.Color
 
 object main extends App {
-  val (width, height) = (800, 600)
+  val (width, height) = (1200, 650)
   
   val updateFunc = showUI()
   
