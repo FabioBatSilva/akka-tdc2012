@@ -13,15 +13,10 @@ object main extends App {
     Props(new ColorfulMasterActor(new ColorfulMaster(width, height, updateFunc))), "color-master")
   master ! StartColorPicking
   
-  //TODO: terribly ugly workaround, replace this with a count of the messages
-  //      to find out when we are done
-  Thread.sleep(60000)
-  
-  ColorfulSystem.system.shutdown
-  
   //TODO: replace with scala-swing? manual classpath adding required?
   def showUI(): (Int, Int, Color) => Unit = {
     import java.awt._
+    import java.awt.event.{WindowAdapter, WindowEvent}
     import javax.swing._
 
     val panel = new JPanel()
@@ -31,6 +26,9 @@ object main extends App {
     frame.setLayout(new BorderLayout())
     frame.add(panel)
     frame.pack()
+    frame.addWindowListener(new WindowAdapter() {
+        override def windowClosing(e: WindowEvent) = ColorfulSystem.system.shutdown
+      })
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
     frame.setVisible(true)
     
