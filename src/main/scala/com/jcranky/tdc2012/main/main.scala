@@ -7,10 +7,8 @@ import java.awt.Color
 object main extends App {
   val (width, height) = (1200, 650)
   
-  val updateFunc = showUI()
-  
-  val master = ColorfulSystem.system.actorOf(
-    Props(new ColorfulMasterActor(new ColorfulMaster(width, height, updateFunc))), "color-master")
+  val master = ColorfulSystem.system.actorOf(Props(
+      new ColorfulMasterActor(new ColorfulMaster(width, height, showUI()))), "color-master")
   master ! StartColorPicking
   
   //TODO: replace with scala-swing? manual classpath adding required?
