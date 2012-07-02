@@ -1,6 +1,6 @@
 package com.jcranky.tdc2012
 
-import akka.actor.{Actor, ActorRef}
+import akka.actor.{Actor, ActorRef, Props}
 import akka.dispatch.Await
 import akka.pattern.ask
 import akka.util.duration._
@@ -8,8 +8,12 @@ import akka.util.Timeout
 import java.awt.Color
 import scala.util.Random
 
-class ColorChooserActor(rPartChooser: ActorRef, gPartChooser: ActorRef, bPartChooser: ActorRef) extends Actor {
+class ColorChooserActor extends Actor {
+  val rPartChooser = context.actorOf(Props[ColorPartChooserActor], "r-color-part-chooser")
+  val gPartChooser = context.actorOf(Props[ColorPartChooserActor], "g-color-part-chooser")
+  val bPartChooser = context.actorOf(Props[ColorPartChooserActor], "b-color-part-chooser")
   implicit val timeout = Timeout(5 seconds)
+  
   def receive = {
     case FindColor(pos) => 
       val colorFuture = for {
