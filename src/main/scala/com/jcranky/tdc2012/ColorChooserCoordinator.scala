@@ -1,11 +1,11 @@
 package com.jcranky.tdc2012
 
 import akka.actor.{Actor, Props}
-import akka.routing.RoundRobinRouter
+import akka.routing.FromConfig
 
 class ColorChooserCoordinator(coord: Coordinator = new Coordinator) extends Actor {
   val colorChooserRouter = context.actorOf(
-    Props[ColorChooserActor].withRouter(RoundRobinRouter(nrOfInstances=5)), "color-chooser-router")
+    Props[ColorChooserActor].withRouter(FromConfig()), "color-chooser-router")
   
   def receive = {
     case FindColorForRange(init, end) => 
