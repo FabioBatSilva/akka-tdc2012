@@ -9,7 +9,7 @@ class ColorChooserCoordinator(coord: Coordinator = new Coordinator) extends Acto
   
   def receive = {
     case FindColorForRange(init, end) => 
-      coord.positions(init, end) foreach(pos => colorChooserRouter ! (FindColor(pos), sender))
+      coord.positions(init, end) foreach(pos => colorChooserRouter.tell(FindColor(pos), sender))
   }
 }
 
