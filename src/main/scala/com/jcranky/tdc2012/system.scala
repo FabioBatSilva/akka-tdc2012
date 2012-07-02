@@ -10,7 +10,6 @@ class ColorfulMasterActor(colorful: ColorfulMaster) extends Actor {
     case StartColorPicking => colorCoordinator ! colorful.positionsToColor
     case ColorFound(pos, color) =>  //TODO: paint it ?
   }
-  
 }
 
 class ColorfulMaster(width: Int, height: Int) {
@@ -19,5 +18,5 @@ class ColorfulMaster(width: Int, height: Int) {
 
 object ColorfulSystem {
   val system = ActorSystem("TDC2012-Demo")
-  val master = system.actorOf(Props(new ColorfulMasterActor(new ColorfulMaster(800, 600))))
+  val master = system.actorOf(Props(new ColorfulMasterActor(new ColorfulMaster(800, 600))), "color-master")
 }
