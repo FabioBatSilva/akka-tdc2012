@@ -1,6 +1,6 @@
 package com.jcranky.tdc2012
 
-import akka.actor.{Actor, ActorRef, Props}
+import akka.actor.{Actor, Props}
 import akka.dispatch.Await
 import akka.pattern.ask
 import akka.util.duration._
