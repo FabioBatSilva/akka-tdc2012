@@ -4,7 +4,7 @@ import akka.actor.{Actor, ActorSystem, Props}
 
 //TODO: receive or configure somehow the location of the coordinators?
 class ColorfulMasterActor(colorful: ColorfulMaster) extends Actor {
-  val colorCoordinator = context.actorOf(Props[ColorChooserCoordinator], "color-chooser-coordinator")
+  val colorCoordinator = context.actorOf(Props(new ColorChooserCoordinator()), "color-chooser-coordinator")
   
   def receive = {
     case StartColorPicking => colorCoordinator ! colorful.positionsToColor
