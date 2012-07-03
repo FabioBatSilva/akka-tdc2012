@@ -29,7 +29,7 @@ class ColorfulMaster(width: Int, height: Int, val paintColor: (Int, Int, Color) 
     currentColorsCount += 1
     if (totalColorsCount == currentColorsCount) {
       timeSpent = System.currentTimeMillis - startTime
-      println("painting everything took %d milliseconds".format(timeSpent))
+      println("[Timing] painting everything took %d milliseconds".format(timeSpent))
     }
   }
   def positionsToColor() = FindColorForRange(Position(0,0), Position(width-1, height-1))
