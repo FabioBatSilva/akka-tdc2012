@@ -8,12 +8,30 @@ class ColorfulMasterActor(colorful: ColorfulMaster) extends Actor {
   val colorCoordinator = context.actorOf(Props(new ColorChooserCoordinator()), "color-chooser-coordinator")
   
   def receive = {
-    case StartColorPicking => colorCoordinator ! colorful.positionsToColor
-    case ColorFound(pos, color) => colorful.paintColor(pos.x, pos.y, color)
+    case StartColorPicking =>
+      colorful.start
+      colorCoordinator ! colorful.positionsToColor
+      
+    case ColorFound(pos, color) =>
+      colorful.oneMore
+      colorful.paintColor(pos.x, pos.y, color)
   }
 }
 
 class ColorfulMaster(width: Int, height: Int, val paintColor: (Int, Int, Color) => Unit) {
+  private val totalColorsCount = (width-1) * (height-1)
+  private var currentColorsCount = 0
+  private var startTime: Long = _
+  private var timeSpent: Long = _
+  
+  def start = startTime = System.currentTimeMillis
+  def oneMore = {
+    currentColorsCount += 1
+    if (totalColorsCount == currentColorsCount) {
+      timeSpent = System.currentTimeMillis - startTime
+      println("painting everything took %d milliseconds".format(timeSpent))
+    }
+  }
   def positionsToColor() = FindColorForRange(Position(0,0), Position(width-1, height-1))
 }
 
