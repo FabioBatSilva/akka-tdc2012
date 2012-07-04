@@ -10,9 +10,7 @@ import org.specs2.mutable.Specification
 
 class PingPongActorSpec extends Specification {
   "the ping pong actor" should {
-    implicit val system = ActorSystem("test-system")
-    
-    "reply with pong after receiving ping" in {
+    "reply with pong after receiving ping" in new ActorScope {
       val actor = TestActorRef[PingPongActor]
       val result = actor.ask(Ball("ping"))(Timeout(5000))
       val ball = Await.result(result, Duration("5 seconds")).asInstanceOf[Ball]
