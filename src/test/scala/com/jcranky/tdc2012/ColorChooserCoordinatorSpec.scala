@@ -11,7 +11,7 @@ class ColorChooserCoordinatorSpec extends Specification with Mockito {
       val coord = mock[Coordinator]
       val actor = TestActorRef(
         Props(new ColorChooserCoordinator(coord)),
-        TestActorRef(new ColorfulMasterActor(mock[ColorfulMaster]),"color-master"),
+        TestActorRef(new ColorfulMasterActor(mock[ColorfulMaster]), "color-master"),
         "color-chooser-coordinator")
       
       val (init, end) = (Position(0, 0), Position(10, 10))
