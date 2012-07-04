@@ -1,6 +1,5 @@
 package com.jcranky.tdc2012
 
-import akka.actor.ActorSystem
 import akka.dispatch.Await
 import akka.pattern.ask
 import akka.testkit.TestActorRef
