@@ -26,8 +26,8 @@ class ColorChooserCoordinatorSpec extends Specification with Mockito {
     val coord = new Coordinator()
     
     "generated the list of positions" in {
-      coord.positions(Position(0, 0), Position(2, 2)) must contain(
-        Position(0, 0), Position(0, 1), Position(1, 0), Position(1, 1)
+      coord.positions(Position(1, 1), Position(2, 2)) must contain(
+        Position(1, 1), Position(1, 2), Position(2, 1), Position(2, 2)
       ).only
     }
   }

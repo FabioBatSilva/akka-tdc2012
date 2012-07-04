@@ -15,5 +15,5 @@ class ColorChooserCoordinator(coord: Coordinator = new Coordinator) extends Acto
 
 class Coordinator {
   def positions(init: Position, end: Position) =
-    for {x <- init.x to end.x-1; y <- init.y to end.y-1} yield Position(x, y)
+    for {x <- init.x to end.x; y <- init.y to end.y} yield Position(x, y)
 }
