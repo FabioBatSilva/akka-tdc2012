@@ -12,7 +12,15 @@ class ColorfulMasterActorSpec extends Specification with Mockito {
       
       master ! StartColorPicking
       
-      there was one(masterInstance).positionsToColor
+      there was one(masterInstance).positionsToColor(any)
+    }
+    
+    "get the correct positions to color" in {
+      val colorMaster = new ColorfulMaster(800, 600, (x, y, c) => Unit)
+      val postList = colorMaster.positionsToColor(2)
+      
+      postList(0) must_== FindColorForRange(Position(1, 1), Position(400, 600))
+      postList(1) must_== FindColorForRange(Position(401, 1), Position(800, 600))
     }
   }
 }

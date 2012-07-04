@@ -6,11 +6,14 @@ import java.awt.Color
 //TODO: receive or configure somehow the location of the coordinators?
 class ColorfulMasterActor(colorful: ColorfulMaster) extends Actor {
   val colorCoordinator = context.actorOf(Props(new ColorChooserCoordinator()), "color-chooser-coordinator")
+  val colorCoordinator2 = context.actorOf(Props(new ColorChooserCoordinator()), "color-chooser-coordinator-2")
   
   def receive = {
     case StartColorPicking =>
       colorful.start
-      colorCoordinator ! colorful.positionsToColor
+      val posList = colorful.positionsToColor(2)
+      colorCoordinator ! posList(0)
+      colorCoordinator2 ! posList(1)
       
     case ColorFound(pos, color) =>
       colorful.oneMore
@@ -32,7 +35,11 @@ class ColorfulMaster(width: Int, height: Int, val paintColor: (Int, Int, Color) 
       println("[Timing] painting everything took %d milliseconds".format(timeSpent))
     }
   }
-  def positionsToColor() = FindColorForRange(Position(0,0), Position(width-1, height-1))
+  def positionsToColor(coordNumber: Int) = 1 to coordNumber map {x =>
+    FindColorForRange(
+      Position(width / coordNumber * x - width / coordNumber + 1, 1),
+      Position(width / coordNumber * x, height))
+  }
 }
 
 object ColorfulSystem {
