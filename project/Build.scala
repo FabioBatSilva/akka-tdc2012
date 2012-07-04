@@ -44,6 +44,7 @@ object Dependencies {
      
   val colorKernel = Seq(
     "com.typesafe.akka" % "akka-actor" % V.Akka,
+    "com.typesafe.akka" % "akka-remote" % V.Akka,
     "com.typesafe.akka" % "akka-kernel" % V.Akka,
     "com.typesafe.akka" % "akka-slf4j" % V.Akka,
     "ch.qos.logback" % "logback-classic" % "1.0.0"
