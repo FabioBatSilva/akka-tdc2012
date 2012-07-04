@@ -15,9 +15,9 @@ class ColorfulMasterActor(colorful: ColorfulMaster) extends Actor {
       colorCoordinator ! posList(0)
       colorCoordinator2 ! posList(1)
       
-    case ColorFound(pos, color) =>
+    case ColorFound(pos, (r, g, b)) =>
       colorful.oneMore
-      colorful.paintColor(pos.x, pos.y, color)
+      colorful.paintColor(pos.x, pos.y, new Color(r, g, b))
   }
 }
 

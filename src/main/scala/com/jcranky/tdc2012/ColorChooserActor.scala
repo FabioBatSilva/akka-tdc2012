@@ -5,7 +5,6 @@ import akka.dispatch.Await
 import akka.pattern.ask
 import akka.util.duration._
 import akka.util.Timeout
-import java.awt.Color
 import scala.util.Random
 
 class ColorChooserActor extends Actor {
@@ -20,7 +19,7 @@ class ColorChooserActor extends Actor {
         r <- (rPartChooser ? FindColorPart).mapTo[ColorPartFound]
         g <- (gPartChooser ? FindColorPart).mapTo[ColorPartFound]
         b <- (bPartChooser ? FindColorPart).mapTo[ColorPartFound]
-      } yield new Color(r.value, g.value, b.value)
+      } yield (r.value, g.value, b.value)
       
       val color = Await.result(colorFuture, 5 seconds)
       sender ! ColorFound(pos, color)
