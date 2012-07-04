@@ -1,6 +1,7 @@
 package com.jcranky.tdc2012.main
 
 import akka.actor.Props
+import akka.kernel.Bootable
 import com.jcranky.tdc2012._
 import java.awt.Color
 
@@ -11,7 +12,6 @@ object main extends App {
       new ColorfulMasterActor(new ColorfulMaster(width, height, showUI()))), "color-master")
   master ! StartColorPicking
   
-  //TODO: replace with scala-swing? manual classpath adding required?
   def showUI(): (Int, Int, Color) => Unit = {
     import java.awt._
     import java.awt.event.{WindowAdapter, WindowEvent}
@@ -38,4 +38,12 @@ object main extends App {
   }
 }
 
-//TODO: have another kind of main, to startup a node with the akka micro kernel
+class ColorKernel extends Bootable {
+  def startup = {
+    ColorfulSystem.system.actorOf(Props[PingPongActor], "dummy")
+  }
+  
+  def shutdown = {
+    ColorfulSystem.system.shutdown
+  }
+}
