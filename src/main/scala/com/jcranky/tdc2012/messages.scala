@@ -8,6 +8,7 @@ case class FindColorForRange(initialPos: Position, finalPos: Position)
 
 case class FindColor(pos: Position)
 case class ColorFound(pos: Position, rgb: Tuple3[Float, Float, Float])
+case class ColorsFound(colors: List[ColorFound])
 
 case object FindColorPart
 case class ColorPartFound(value: Float)
