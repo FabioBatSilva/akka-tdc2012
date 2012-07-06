@@ -6,7 +6,7 @@ import com.jcranky.tdc2012._
 import java.awt.Color
 
 object main extends App {
-  val (width, height) = (1200, 650)
+  val (width, height) = (1000, 500)
   
   val master = ColorfulSystem.system.actorOf(Props(
       new ColorfulMasterActor(new ColorfulMaster(width, height, showUI()))), "color-master")
