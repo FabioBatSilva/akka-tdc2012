@@ -2,6 +2,7 @@ package com.jcranky.tdc2012
 
 import akka.actor.{Actor, Props}
 import akka.routing.FromConfig
+import scala.collection.mutable.ListBuffer
 
 class ColorChooserCoordinator(coord: Coordinator = new Coordinator) extends Actor {
   val colorChooserRouter = context.actorOf(
@@ -9,7 +10,14 @@ class ColorChooserCoordinator(coord: Coordinator = new Coordinator) extends Acto
   
   def receive = {
     case FindColorForRange(init, end) => 
-      coord.positions(init, end) foreach(pos => colorChooserRouter.tell(FindColor(pos), sender))
+      var buf = ListBuffer[Position]()
+      coord.positions(init, end) foreach(pos => {
+          buf += pos
+          if (buf.size >= 5000) {
+            colorChooserRouter.tell(FindColor(buf.toList), sender)
+            buf.clear
+          }
+        })
   }
 }
 
