@@ -3,7 +3,6 @@ package com.jcranky.tdc2012
 import akka.actor.{Actor, ActorSystem, Props}
 import java.awt.Color
 
-//TODO: receive or configure somehow the location of the coordinators?
 class ColorfulMasterActor(colorful: ColorfulMaster) extends Actor {
   val colorCoordinator = context.actorOf(Props(new ColorChooserCoordinator()), "color-chooser-coordinator")
   val colorCoordinator2 = context.actorOf(Props(new ColorChooserCoordinator()), "color-chooser-coordinator-2")
